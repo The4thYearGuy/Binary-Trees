@@ -1,0 +1,19 @@
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        ArrayList<Integer> al = new ArrayList<>();
+        
+        inOrderTrav(root, al);
+        
+        return al;
+        
+    }
+    public void inOrderTrav(TreeNode root , ArrayList<Integer> al)  {
+        if(root == null)return ;
+        
+        inOrderTrav(root.left , al);
+        
+        al.add(root.val);
+        
+        inOrderTrav(root.right , al);
+    }
+}
