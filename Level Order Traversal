@@ -1,0 +1,32 @@
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        Queue<TreeNode> qq = new LinkedList<>();
+        
+        List<List<Integer>> wrapList = new LinkedList<List<Integer>>(); 
+        
+        if(root == null)
+            return wrapList;
+        
+        qq.offer(root);
+        
+        // int len = qq.size();
+        while(!qq.isEmpty())    {
+            List<Integer> val =  new LinkedList<>();
+            int len = qq.size();
+            for(int i = 0; i<len ; i++)   {
+                
+                if(qq.peek().left != null)
+                    qq.offer(qq.peek().left);
+                
+                if(qq.peek().right != null)
+                    qq.offer(qq.peek().right);
+                
+                val.add(qq.poll().val);
+            }
+            wrapList.add(val);
+        }
+        
+        return wrapList;
+    
+    }
+}
