@@ -1,7 +1,7 @@
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
-        Queue<TreeNode> qq = new LinkedList<>();
-        
+        Queue<TreeNode> qq = new LinkedList<>();                                                       // Queue coz we need the same as it is as inserted in the tree
+            
         List<List<Integer>> wrapList = new LinkedList<List<Integer>>(); 
         
         if(root == null)
