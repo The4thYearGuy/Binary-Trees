@@ -1,0 +1,47 @@
+public class Solution {
+	public static ArrayList<Integer> traverseBoundary(TreeNode root){
+		ArrayList<Integer> ans = new ArrayList<>();                                                             // Left boundary then leaf then right and anticlockwise rotation is done in this code
+        if(isLeaf(root) == false) ans.add(root.data);
+        addLeftB(root, ans);
+        addLeaves(root , ans);
+        addRightB(root, ans);
+        return ans;
+	}
+   public static void addLeftB(TreeNode root , ArrayList<Integer> res)    {
+        TreeNode cur = root.left;
+        while(cur != null){
+            if(isLeaf(cur) == false) res.add(cur.data);
+            if(cur.left != null) cur = cur.left;
+            else cur = cur.right;
+        }
+    }
+    
+    public static void addLeaves(TreeNode root , ArrayList<Integer> res)    {
+        if(isLeaf(root)){
+            res.add(root.data);
+            return;
+        }
+        if(root.left != null) addLeaves(root.left, res);
+        if(root.right != null) addLeaves(root.right , res);
+    }
+    public static void addRightB(TreeNode root , ArrayList<Integer> res)    {
+        TreeNode cur = root.right;
+        ArrayList<Integer> temp  = new ArrayList<>();
+        while(cur != null){                                                         //Reverse is done in the right boundary of the code as it will return in reverse coz anticlockwise rotation is done
+            if(isLeaf(cur) == false) temp.add(cur.data);                              // Stored in an data structure so that the rev is done and then pushed into the main data structure
+            if(cur.right != null) cur = cur.right;
+            else cur = cur.left;
+        }
+        for(int i = temp.size()-1 ; i>=0; i--)
+            res.add(temp.get(i));
+    }
+    public static boolean isLeaf(TreeNode root){    
+            if(root.left == null && root.right == null)
+                return true;
+            else
+                return false;
+    }
+    
+    
+    
+}
