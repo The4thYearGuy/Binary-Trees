@@ -1,0 +1,35 @@
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+         Queue<TreeNode> qq = new LinkedList<>();                                                       // Queue coz we need the same as it is as inserted in the tree
+            
+        List<List<Integer>> wrapList = new LinkedList<List<Integer>>(); 
+        
+        if(root == null)
+            return wrapList;
+        
+        qq.offer(root);
+        int flag = 1;
+        while(!qq.isEmpty())    {
+            List<Integer> val =  new LinkedList<>();
+            int len = qq.size();
+            for(int i = 0; i<len ; i++)   {
+            
+                if(qq.peek().left != null)
+                    qq.offer(qq.peek().left);
+                
+                if(qq.peek().right != null)
+                    qq.offer(qq.peek().right);
+                
+                if(flag%2 == 0)
+                    val.add(0 , qq.poll().val);
+                else
+                    val.add(qq.poll().val);
+                
+            }
+            flag++;
+            wrapList.add(val);
+        }
+        
+        return wrapList;
+    }
+}
