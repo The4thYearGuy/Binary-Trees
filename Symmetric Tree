@@ -1,0 +1,15 @@
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        return (root == null || isCheck(root.left , root.right));
+    }
+    
+    boolean isCheck(TreeNode p , TreeNode q){
+       if (p == null || q == null)
+           return p == q; 
+        
+        if(p.val != q.val )
+            return false;
+        
+        return isCheck(p.left , q.right)&&isCheck(p.right , q.left);
+    }
+}
