@@ -1,0 +1,36 @@
+class Solution {
+    TreeNode prev = null;
+    public void flatten(TreeNode node) 
+    { 
+        if(node == null)
+            return ;                                              // Recursive approach TC: O(N) SC: O(N)
+        
+        flatten(node.right);
+        flatten(node.left);
+        
+        node.right = prev;
+        node.left = null;
+        prev = node;
+    }
+}
+
+class Solution {
+    TreeNode prev = null;
+    public void flatten(TreeNode node) 
+    {   TreeNode cur = node;                                          // Using Morris Traversal TC:O(N) SC: O(1)
+        while(cur!= null)
+        {      
+            if(cur.left != null)
+            {   prev = cur.left;
+                while(prev.right != null)
+                    prev = prev.right;
+                prev.right = cur.right;
+                cur.right = cur.left;
+             
+                cur.left = null;
+            }
+            cur = cur.right;
+        }
+        
+    }
+}
