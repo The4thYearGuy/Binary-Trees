@@ -1,0 +1,47 @@
+import java.util.ArrayList;
+
+public class Solution {
+	public static ArrayList<Integer> predecessorSuccessor(BinaryTreeNode<Integer> root, int key) {
+		ArrayList<Integer> ans = new ArrayList<>();
+        
+        predecessor(root , key ,ans);
+        Successor(root , key , ans);
+        return ans;
+	}
+    
+  public static ArrayList<Integer> Successor(BinaryTreeNode<Integer> root , int key , ArrayList<Integer> ans)
+    {
+        int successor = -1;
+        
+        while(root!= null)
+        {
+            if(key >= root.data)
+                root = root.right;
+            else{
+                successor = root.data;
+                root = root.left;
+            }   
+        }
+        
+        ans.add(successor);
+        return ans;
+    }
+    public static ArrayList<Integer> predecessor(BinaryTreeNode<Integer> root , int key , ArrayList<Integer> ans)
+    {
+        int predecess = -1;
+        
+        while(root!= null)
+        {
+            if(key > root.data)
+            {
+                predecess = root.data;
+                root = root.right;
+            }
+            else
+                root = root.left;
+        }
+        
+        ans.add(predecess);
+        return ans;
+    }
+}
