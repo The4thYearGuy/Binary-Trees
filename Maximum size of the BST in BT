@@ -1,0 +1,31 @@
+class Pair{
+    public int minNode , maxNode , maxSize , maxSum ;
+    
+    Pair(int minNode , int maxNode , int maxSize , int maxSum){
+        this.maxNode = maxNode;
+        this.minNode = minNode;
+        this.maxSize = maxSize;
+        this.maxSum = maxSum;
+    }
+}
+
+class Solution {
+    public int maxSumBST(TreeNode root) {
+        return largestBSTSum(root).maxSum;
+    }
+    
+    private Pair largestBSTSum(TreeNode root){
+        if(root == null)
+            return new Pair(Integer.MAX_VALUE , Integer.MIN_VALUE , 0 , 0);
+        
+        Pair left = largestBSTSum(root.left);
+        Pair right = largestBSTSum(root.right);
+        
+        if(left.maxNode < root.val && root.val < right.minNode)
+        {   
+            return new Pair(Math.min(root.val, left.minNode) , Math.max(root.val ,  right.maxNode) ,  left.maxSize + right.maxSize + 1 , =);
+        }
+        
+        return new Pair(Integer.MIN_VALUE , Integer.MAX_VALUE , Math.max(left.maxSize , right.maxSize) , maxSum);
+    }
+}
